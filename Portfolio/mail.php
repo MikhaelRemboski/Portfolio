@@ -1,12 +1,17 @@
 <?php
-
-$recepient = "mikhaelremboski@gmail.com";
-$sitename = "Portfolio Mikhael Remboski";
-
-$name = trim($_POST["name"]);
-$email = trim($_POST["email"]);
-$text = trim($_POST["text"]);
-$message = "Name: $name \nEmail: $email \nText: $text";
-
-$pagetitle = "Nuevo mensaje de \"$sitename\"";
-mail($recepient, $pagetitle, $message, "Content-type: text/plain; charset=\"utf-8\"\n From: $recepient");
+if(isset($_POST["text"]) && isset($_POST["email"]) && isset($_POST["name"]) ){
+$to = "mikhael@c0880319.ferozo.com";
+$subject = "Mensaje Enviado";
+$contenido .= "Nombre: ".$_POST["name"]."\n";
+$contenido .= "Email: ".$_POST["email"]."\n\n";
+$contenido .= "Mensaje: ".$_POST["text"]."\n\n";
+$header = "From: mikhael@c0880319.ferozo.com\nReply-To:".$_POST["email"]."\n";
+$header .= "Mime-Version: 1.0\n";
+$header .= "Content-Type: text/plain";
+if(mail($to, $subject, $contenido ,$header)){
+echo "Mail Enviado.";
+}else{
+    echo "Mail rechazado", "Contenido: ", $contenido,"Header: ", $header,"To: ", $to,"subject: ", $subject;
+}
+}
+?>
